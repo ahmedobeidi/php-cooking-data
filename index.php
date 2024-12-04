@@ -3,12 +3,13 @@
 echo "***** Dictionnaire ******";
 echo "<br/><br/>";
 
-// /* Exercise 1 */
 $string = file_get_contents("dictionnaire.txt", FILE_USE_INCLUDE_PATH);
 $dico = explode("\n", $string);
 
+//* Exercise 1 */
 $length = count($dico);
 echo "Ce dictionnaire contient : {$length} mots";
+// echo count($dico);
 echo "<br/><br/>";
 
 /* Exercise 2 */
@@ -38,4 +39,13 @@ foreach($dico as $value) {
 echo "Nombre de mots avec un Q : {$counterQ}";
 echo "<br/><br/><br/>";
 
+
 echo "***** Liste de films ******";
+$string = file_get_contents("films.json", FILE_USE_INCLUDE_PATH);
+$brut = json_decode($string, true);
+$top = $brut["feed"]["entry"]; # liste de films
+
+foreach($top as $key => $films) {
+   echo $key + 1 . " ". $films['im:name']['label'] . "<br/>";
+   if ($key === 9) break;
+}
